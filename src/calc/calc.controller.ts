@@ -5,7 +5,7 @@ import { CalcDto } from './calc.dto';
 
 @Controller('calc')
 export class CalcController {
-  constructor(private readonly calcService: CalcService) { }
+  constructor(private readonly calcService: CalcService) {}
 
   @Post()
   calculate(@Body() calcDto: CalcDto, @Res() res: Response) {

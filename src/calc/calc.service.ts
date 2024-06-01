@@ -46,31 +46,33 @@ export class CalcService {
         default:
           throw new Error('Invalid operator');
       }
-    };
+    }
 
     function operatorPrecedence(op: string) {
       if (op === '+' || op === '-') return 1;
       if (op === '*' || op === '/') return 2;
       return 0;
-    };
+    }
 
     for (let i = 0; i < expression.length; i++) {
       const char = expression[i];
 
       if (!isNaN(Number(char))) {
         num += char;
-      }
-      else if (char === '+' || char === '-' || char === '*' || char === '/') {
+      } else if (char === '+' || char === '-' || char === '*' || char === '/') {
         if (num) {
           numberStack.push(Number(num));
           num = '';
         }
-        while (operatorStack.length && operatorPrecedence(operatorStack[operatorStack.length - 1]) >= operatorPrecedence(char)) {
+        while (
+          operatorStack.length &&
+          operatorPrecedence(operatorStack[operatorStack.length - 1]) >=
+            operatorPrecedence(char)
+        ) {
           executeOperation();
         }
         operatorStack.push(char);
-      }
-      else {
+      } else {
         throw new Error('Invalid character');
       }
     }
